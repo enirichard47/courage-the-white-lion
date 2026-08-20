@@ -29,6 +29,9 @@ const art=document.querySelector('.hero-art img');
 window.addEventListener('mousemove',e=>{if(!art||innerWidth<900)return;const x=(e.clientX/innerWidth-.5)*8,y=(e.clientY/innerHeight-.5)*5;art.style.transform=`translate(${x}px,${y}px) scale(1.02)`});
 
 const audio=document.getElementById('ambientAudio');
+if (audio) {
+  audio.src = 'audio/ambient.mp3';
+}
 const audioWidget=document.getElementById('audioWidget');
 const audioToggle=document.getElementById('audioToggle');
 const audioStatus=document.getElementById('audioStatus');
@@ -454,5 +457,77 @@ function updateShareUrl() {
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textVal)}`;
   shareTwitterBtn.href = twitterUrl;
 }
+
+// ==========================================
+// CINEMATIC PRELOADER LOGIC
+// ==========================================
+
+(function() {
+  const preloader = document.getElementById('preloader');
+  const preloaderBar = document.getElementById('preloaderBar');
+  const preloaderPercent = document.getElementById('preloaderPercent');
+
+  if (!preloader) return;
+
+  // Lock scroll during preloader
+  document.body.style.overflow = 'hidden';
+
+  let progress = 0;
+  let isWindowLoaded = false;
+
+  // Update progress bar helper
+  function updateProgress(value) {
+    if (preloaderBar) preloaderBar.style.width = value + '%';
+    if (preloaderPercent) preloaderPercent.textContent = Math.round(value) + '%';
+  }
+
+  // Smooth loading simulation (interpolates toward target)
+  const loadInterval = setInterval(() => {
+    if (!isWindowLoaded) {
+      // Slow down as we approach 90%
+      if (progress < 90) {
+        progress += (90 - progress) * 0.05 + 0.5;
+      }
+    } else {
+      // Speed up to 100% when load finishes
+      progress += (100 - progress) * 0.2 + 2;
+    }
+
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(loadInterval);
+      dismissPreloader();
+    }
+
+    updateProgress(progress);
+  }, 20);
+
+  // When all assets are fully fetched
+  window.addEventListener('load', () => {
+    isWindowLoaded = true;
+  });
+
+  // Hides the preloader with premium ease-out transitions
+  function dismissPreloader() {
+    setTimeout(() => {
+      preloader.classList.add('fade-out');
+      // Unlock body scroll
+      document.body.style.overflow = '';
+      
+      // Fully remove from DOM tree after transitions finish (0.8s) for cleanup
+      setTimeout(() => {
+        preloader.remove();
+      }, 800);
+    }, 200); // Small visual holding time at 100%
+  }
+
+  // Fallback: Dismiss after 8 seconds in case window load event fails to fire
+  setTimeout(() => {
+    if (!isWindowLoaded) {
+      isWindowLoaded = true;
+    }
+  }, 8000);
+})();
+
 
 

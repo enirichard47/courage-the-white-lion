@@ -397,3 +397,122 @@ footer{margin-top:130px;border-top:1px solid rgba(183,107,255,.25);padding:50px 
   }
 }
 
+/* PRELOADER STYLES */
+#preloader {
+  font-family: var(--body);
+  color: var(--text);
+}
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+.preloader-logo-container {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.preloader-logo {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(183, 107, 255, 0.6);
+  z-index: 2;
+  box-shadow: 0 0 20px rgba(141, 54, 255, 0.4);
+}
+.preloader-glow-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--green);
+  opacity: 0.6;
+  z-index: 1;
+  animation: pulseRing 2s infinite ease-in-out;
+}
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 10px rgba(77, 255, 200, 0.3);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 30px rgba(77, 255, 200, 0.6), 0 0 50px rgba(141, 54, 255, 0.4);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(0.9);
+    box-shadow: 0 0 10px rgba(77, 255, 200, 0.3);
+    opacity: 0.8;
+  }
+}
+.preloader-title {
+  font-family: var(--display);
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin: 0 0 6px 0;
+  color: #fff;
+  text-shadow: 0 0 15px rgba(183, 107, 255, 0.5);
+  animation: floatTitle 3s infinite ease-in-out;
+}
+@keyframes floatTitle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+.preloader-subtitle {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--green);
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+.preloader-track {
+  width: 220px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+.preloader-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--purple), var(--green));
+  border-radius: 4px;
+  box-shadow: 0 0 8px var(--green);
+  transition: width 0.1s cubic-bezier(0.1, 0.8, 0.25, 1);
+}
+.preloader-percentage {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 1px;
+  font-family: monospace;
+}
+
+#preloader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+

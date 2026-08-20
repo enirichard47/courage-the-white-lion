@@ -12,6 +12,22 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- CINEMATIC PRELOADER -->
+  <div id="preloader" style="position: fixed; inset: 0; z-index: 9999; background: #05040a; display: flex; align-items: center; justify-content: center; transition: opacity 0.8s ease, visibility 0.8s;">
+    <div class="preloader-content">
+      <div class="preloader-logo-container">
+        <img src="logo.jpg" alt="$COURAGE Loading Logo" class="preloader-logo">
+        <div class="preloader-glow-ring"></div>
+      </div>
+      <h2 class="preloader-title">$COURAGE</h2>
+      <div class="preloader-subtitle">STRENGTH • UNITY • COURAGE</div>
+      <div class="preloader-track">
+        <div class="preloader-bar" id="preloaderBar"></div>
+      </div>
+      <div class="preloader-percentage" id="preloaderPercent">0%</div>
+    </div>
+  </div>
+
   <div class="noise"></div>
 
   <header class="site-header">
